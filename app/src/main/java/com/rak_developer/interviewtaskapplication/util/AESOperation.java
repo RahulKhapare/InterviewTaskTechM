@@ -16,7 +16,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class AESOperation {
 
     private String saltKey = "Asdf@1234";
-    private String secretKey = "Asdf@1234";
+    private String secretKey = "SAKKs@1234";
 
     public String encryptKey(String strToEncrypt) {
         String encryptedString = "";

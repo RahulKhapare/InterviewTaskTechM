@@ -1,8 +1,11 @@
 package com.rak_developer.interviewtaskapplication.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -13,7 +16,6 @@ import com.rak_developer.interviewtaskapplication.util.AESOperation;
 import com.rak_developer.interviewtaskapplication.util.MD5Operation;
 import com.rak_developer.interviewtaskapplication.util.RSAOperation;
 import com.rak_developer.interviewtaskapplication.util.SHA256Operation;
-import com.rak_developer.interviewtaskapplication.util.ToastOperation;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
@@ -37,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private MD5Operation md5 = new MD5Operation();
     private SHA256Operation sha256 = new SHA256Operation();
     private AESOperation aes = new AESOperation();
-    private ToastOperation toast = new ToastOperation();
 
     private boolean isEncrypted = false;
 
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         if (isEncrypted) {
             decryptOperation();
         } else {
-            toast.showToast(activity, "Please perform encryption operation first.");
+            showToast(activity, "Please perform encryption operation first.");
         }
     }
 
@@ -93,19 +94,19 @@ public class MainActivity extends AppCompatActivity {
             returnValue = aesEncryption;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         } catch (NoSuchPaddingException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         } catch (InvalidKeyException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         } catch (IllegalBlockSizeException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         } catch (BadPaddingException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         }
         return returnValue;
     }
@@ -142,21 +143,27 @@ public class MainActivity extends AppCompatActivity {
             returnValue = rasDecryptionString;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         } catch (NoSuchPaddingException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         } catch (InvalidKeyException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         } catch (IllegalBlockSizeException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         } catch (BadPaddingException e) {
             e.printStackTrace();
-            toast.showToast(activity, e.getMessage());
+            showToast(activity, e.getMessage());
         }
         return returnValue;
+    }
+
+    public void showToast(Context context, String message) {
+        Toast toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
 }
